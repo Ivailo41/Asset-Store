@@ -11,6 +11,8 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Scanner;
 
+import java.net.http.HttpClient;
+
 public class Client {
     private static final int SERVER_PORT = 8080;
 

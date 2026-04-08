@@ -4,7 +4,7 @@ import com.assetstore.client.command.exception.BadArgumentsException;
 
 import java.util.List;
 
-public class getAssetsCommand implements Command {
+public class GetAssetsCommand implements Command {
 
     @Override
     public boolean execute(List<String> args) throws BadArgumentsException {

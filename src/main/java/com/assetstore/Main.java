@@ -1,22 +1,24 @@
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-public record Heading(String method, String path) {
-}
-
-public record Request(Heading heading, Map<String, String> map) {}
+import com.assetstore.network.Request;
+import com.assetstore.network.handler.BodyHandler;
+import com.assetstore.network.publisher.BodyPublisher;
 
 public void main() {
-    Heading header = new Heading("GET", "/");
-    Map<String, String> map = new HashMap<String, String>();
 
-    Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    Request request = new Request.Builder()
+            .uri("/test")
+            .header("Accept", "application/json")
+            .POST(BodyPublisher.ofString("{\"name\":\"test\"}"))
+            .build();
 
-    map.put("size",  "100MB");
-    map.put("file_name", "text.txt");
-    map.put("type", "text");
-    Request request = new Request(header, map);
+    BodyHandler<String> bodyHandler = BodyHandler.ofString();
 
-    System.out.println(GSON.toJson(request));
+    try{
+        bodyHandler.processChunk(request.body().nextChunk());
+        String result = bodyHandler.getBody();
+        System.out.println(result);
+    }
+    catch (IOException e){
+        e.printStackTrace();
+    }
 
 }

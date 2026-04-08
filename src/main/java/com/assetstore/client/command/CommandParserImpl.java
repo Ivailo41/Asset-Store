@@ -1,12 +1,19 @@
 package com.assetstore.client.command;
 
+import com.assetstore.client.command.exception.EmptyInputException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandParserImpl implements CommandParser {
 
     @Override
-    public List<String> parseCommand(String input) {
+    public List<String> parseCommand(String input) throws EmptyInputException {
+
+        if(input.isBlank()) {
+            throw new EmptyInputException("Cant pass empty command");
+        }
+
         List<String> tokens = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
 
