@@ -5,11 +5,11 @@ import com.assetstore.network.publisher.BodyPublisher;
 import java.util.HashMap;
 import java.util.Map;
 
-public record Request(String method, String uri, Map<String, String> headers, BodyPublisher body) {
+public record SitpRequest(String method, String url, Map<String, String> headers, BodyPublisher body) {
 
     public static class Builder {
         private String method = "GET";
-        private String uri;
+        private String url;
         private final Map<String, String> headers;
         private BodyPublisher body;
 
@@ -17,8 +17,8 @@ public record Request(String method, String uri, Map<String, String> headers, Bo
             this.headers = new HashMap<>();
         }
 
-        public Builder uri(String uri) {
-            this.uri = uri;
+        public Builder url(String uri) {
+            this.url = uri;
             return this;
         }
 
@@ -33,8 +33,8 @@ public record Request(String method, String uri, Map<String, String> headers, Bo
             return this;
         }
 
-        public Request build() {
-            return new Request(method, uri, headers, body);
+        public SitpRequest build() {
+            return new SitpRequest(method, url, headers, body);
         }
     }
 }

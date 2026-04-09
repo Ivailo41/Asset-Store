@@ -17,10 +17,6 @@ public class Server {
     private static final int SERVER_PORT = 8080;
     private static final String SERVER_HOST = "0.0.0.0";
 
-    // 0.0.0.0 is a special address meaning "listen on all network interfaces"
-    // This allows clients to connect via localhost, your local IP address,
-    // or any other IP address your machine has
-
     private static final int BUFFER_SIZE = 1024;
 
     public static void main(String[] args) {
@@ -91,9 +87,8 @@ public class Server {
         SocketChannel clientChannel = (SocketChannel) key.channel();
         ByteBuffer buffer = (ByteBuffer) key.attachment();
 
-        System.out.println("Reading from " + clientChannel.getRemoteAddress());
-
-        FileChannel fileChannel = new FileOutputStream("assetsOutput.txt").getChannel();
+        System.out.println("=================Reading from " + clientChannel.getRemoteAddress() + "=================");
+        //FileChannel fileChannel = new FileOutputStream("assetsOutput.txt").getChannel();
 
         buffer.clear();
         int bytesRead = clientChannel.read(buffer);
@@ -106,10 +101,10 @@ public class Server {
         }
 
         buffer.flip();
-        //System.out.println("Client: " + new String(buffer.array(), 0, bytesRead));
-        fileChannel.write(buffer);
+        System.out.println(new String(buffer.array(), 0, bytesRead));
+        //fileChannel.write(buffer);
         clientChannel.write(buffer);
 
-        fileChannel.close();
+        //fileChannel.close();
     }
 }

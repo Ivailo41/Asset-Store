@@ -1,11 +1,11 @@
-import com.assetstore.network.Request;
+import com.assetstore.network.SitpRequest;
 import com.assetstore.network.handler.BodyHandler;
 import com.assetstore.network.publisher.BodyPublisher;
 
 public void main() {
 
-    Request request = new Request.Builder()
-            .uri("/test")
+    SitpRequest sitpRequest = new SitpRequest.Builder()
+            .url("localhost:8080/test")
             .header("Accept", "application/json")
             .POST(BodyPublisher.ofString("{\"name\":\"test\"}"))
             .build();
@@ -13,7 +13,7 @@ public void main() {
     BodyHandler<String> bodyHandler = BodyHandler.ofString();
 
     try{
-        bodyHandler.processChunk(request.body().nextChunk());
+        bodyHandler.processChunk(sitpRequest.body().nextChunk());
         String result = bodyHandler.getBody();
         System.out.println(result);
     }

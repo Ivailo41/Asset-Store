@@ -1,5 +1,6 @@
 package com.assetstore.client.assets;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public class AssetsRetriever {
@@ -12,7 +13,7 @@ public class AssetsRetriever {
         return null;
     }
 
-    public void downloadAsset(String assetPath, String savePath) {
+    public void downloadAsset(String assetPath, Path savePath) {
 
     }
 }

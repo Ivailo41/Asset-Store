@@ -22,6 +22,7 @@ public class FileBodyPublisher implements BodyPublisher {
     @Override
     public ByteBuffer nextChunk() throws IOException {
         if(position >= size) {
+            this.channel.close();
             return null;
         }
 
